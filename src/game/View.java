@@ -13,9 +13,14 @@ import java.awt.image.PixelGrabber;
  */
 
 class View {
-    Canvas canvas;
-    public static void main(String[] args){
 
+    Canvas canvas;
+
+    public static void main(String[] args){
+        Board board = new Board(600, 600);
+        Ant ant = new Ant(new Position(300, 300));
+        Engine engine = new Engine(board, ant);
+        engine.start();
     }
 
     @NotNull

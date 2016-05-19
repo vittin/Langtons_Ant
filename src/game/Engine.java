@@ -1,6 +1,7 @@
 package game;
 
 import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.Contract;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ public class Engine {
         gameThread.stop();
     }
 
+    @Contract(pure = true)
     @NotNull
     private Direction findNextDirection(Direction direction, boolean status){
         Direction dir = null; //NEVER HAPPENS;
@@ -60,5 +62,9 @@ public class Engine {
 
     void showResults() {
         //todo: display;
+        Ant ant = ants.get(0);
+        int x = ant.getPosition().getX();
+        int y = ant.getPosition().getY();
+        System.out.println(x + ", " + y);
     }
 }

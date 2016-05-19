@@ -25,6 +25,7 @@ public class Board {
             fields[i] = new Field();
         }
 
+        Position.setBoard(this);
     }
 
     int getWidth() {
