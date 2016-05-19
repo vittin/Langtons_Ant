@@ -37,7 +37,7 @@ public class Engine {
         switch (direction){
             case UP: dir = (status) ? Direction.RIGHT : Direction.LEFT; break;
             case LEFT: dir = (status) ? Direction.UP : Direction.DOWN; break;
-            case DOWN: dir = (status) ? Direction.RIGHT : Direction.LEFT; break;
+            case DOWN: dir = (status) ? Direction.LEFT : Direction.RIGHT; break;
             case RIGHT: dir = (status) ? Direction.DOWN : Direction.UP; break;
         }
         return dir;
