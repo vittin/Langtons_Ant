@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  * Created by mati on 2016-05-19.
- * TODO: comments.
+ *
  */
 public class FieldTest {
 

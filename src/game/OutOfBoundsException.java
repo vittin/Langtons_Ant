@@ -2,12 +2,14 @@ package game;
 
 /**
  * Created by mati on 2016-05-18.
- * TODO: comments.
+ *
  */
-public class OutOfBoundsException extends Exception {
+class OutOfBoundsException extends Exception {
 
     OutOfBoundsException(String string){
         super(string);
+        //Something went wrong, so game was finished;
+        Engine.stop();
     }
 
     @Override

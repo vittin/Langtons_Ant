@@ -4,19 +4,21 @@ import com.sun.istack.internal.NotNull;
 
 /**
  * Created by mati on 2016-05-18.
- * TODO: comments.
+ *
  */
-public class Board {
-    private int width;
-    private int height;
-    private int size;
-    private Field[] fields;
+class Board {
+    private final int width;
+    private final int height;
+    private final int size;
+    //store all fields;
+    private final Field[] fields;
 
     Board(int width, int height){
-
+        //0 or minus signed numbers as map size? bad idea;
         if (width < 1 || height < 1){
             throw new IllegalArgumentException("Width and height must be greater than 0");
         }
+
         this.size = width * height;
         this.width = width;
         this.height = height;
@@ -25,6 +27,7 @@ public class Board {
             fields[i] = new Field();
         }
 
+        //look strange, but position must be linked to a board; we want get f.ex. (2,2) point from board;
         Position.setBoard(this);
     }
 
@@ -36,12 +39,13 @@ public class Board {
         return height;
     }
 
-    int getSize() {
+    private int getSize() {
         return size;
     }
-
+    
     @NotNull
     Field getField(Position position) throws OutOfBoundsException {
+        //hashcode is ordinal number too;
         if (position.hashCode(width) < this.getSize()) {
             int x = position.getX();
             int y = position.getY();

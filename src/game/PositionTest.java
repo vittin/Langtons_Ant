@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
  * TODO: comments.
  */
 public class PositionTest {
-    Position position;
-    Board board;
+    private Position position;
+    private Board board;
     @Before
     public void setUp() throws Exception {
         position = new Position(1,1);
@@ -47,41 +47,32 @@ public class PositionTest {
 
     @Test
     public void invalidMoveLeft() throws Exception {
+
         position.move(Direction.LEFT);
-        position.move(Direction.LEFT);
-        position.move(Direction.LEFT);
-        position.move(Direction.LEFT);
-        assertEquals(0, position.getX());
+        assertEquals(99, position.getX());
     }
 
     @Test
     public void invalidMoveUp() throws Exception {
+
         position.move(Direction.UP);
-        position.move(Direction.UP);
-        position.move(Direction.UP);
-        position.move(Direction.UP);
-        assertEquals(0, position.getY());
+        assertEquals(99, position.getY());
     }
 
     @Test
-    public void invalidMoveRight() throws Exception {
+    public void skipRightBorder() throws Exception {
 
         position = new Position(board.getWidth() -1, 5);
         position.move(Direction.RIGHT);
-        position.move(Direction.RIGHT);
-        position.move(Direction.RIGHT);
-        position.move(Direction.RIGHT);
-        assertEquals(100, position.getX());
+        assertEquals(1, position.getX());
     }
 
     @Test
-    public void invalidMoveDown() throws Exception {
+    public void skipDownBorder() throws Exception {
+
         position = new Position(5, board.getHeight() -1);
-        position.move(Direction.DOWN);
-        position.move(Direction.DOWN);
-        position.move(Direction.DOWN);
-        position.move(Direction.DOWN);
-        assertEquals(100, position.getY());
+        position.move(Direction.DOWN); //1
+        assertEquals(1, position.getY());
     }
 
 }

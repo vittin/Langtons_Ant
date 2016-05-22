@@ -9,11 +9,11 @@ import static org.junit.Assert.*;
 
 /**
  * Created by mati on 2016-05-19.
- * TODO: comments.
+ *
  */
 public class BoardTest {
 
-    Board board;
+    private Board board;
 
     @Before
     public void setUp() throws Exception {
@@ -36,7 +36,7 @@ public class BoardTest {
     }
 
     @Test
-    public void arraySize() throws Exception {
+    public void getLastField() throws Exception {
         Position position = new Position(199, 299);
         board.getField(position);
     }

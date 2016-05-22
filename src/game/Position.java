@@ -4,6 +4,8 @@ package game;
  * Created by mati on 2016-05-18.
  * TODO: comments.
  */
+
+
 class Position {
     private int x;
     private int y;
@@ -14,23 +16,24 @@ class Position {
         this.y = y;
     }
 
-    public static void setBoard(Board board) {
+    //position is always on the board;
+    static void setBoard(Board board) {
         Position.board = board;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
     private void changeX(int difference) throws OutOfBoundsException {
-        if ((this.x < 1 && difference < 0) ||
-                (this.x + 1 > board.getWidth() && difference > 0)) {
-
-            throw new OutOfBoundsException("Out of map");
+        if ((this.x <= 1 && difference < 0)) {
+            this.x = board.getWidth() - 1;
+        } else if((this.x + 1 >= board.getWidth() && difference > 0)){
+            this.x = 1;
         } else {
             this.x += difference;
         }
@@ -38,16 +41,16 @@ class Position {
     }
 
     private void changeY(int difference) throws OutOfBoundsException {
-        if ((this.y < 1 && difference < 0) ||
-                (this.y + 1 > board.getHeight() && difference > 0)) {
-
-            throw new OutOfBoundsException("Out of map");
-        } else {
+        if ((this.y <= 1 && difference < 0)) {
+            this.y = board.getHeight() - 1;
+        } else if((this.y + 1 >= board.getHeight() && difference > 0)) {
+            this.y = 1;
+        }else {
             this.y += difference;
         }
     }
 
-    public void move(Direction direction) {
+    void move(Direction direction) {
         try {
             switch (direction) {
                 case LEFT:

@@ -4,27 +4,32 @@ import com.sun.istack.internal.NotNull;
 
 /**
  * Created by mati on 2016-05-18.
- * TODO: comments.
+ *
  */
-public class Ant {
+class Ant {
+
     private Position position;
+    //all ants look to the East when they born, don't ask why. They are weird.
     private Direction lookingDirection = Direction.RIGHT;
 
     Ant(Position position){
         this.position = position;
     }
 
-    public Position getPosition() {
+
+    Position getPosition() {
         return position;
     }
 
+    //say me where i should go and i will go there;
     @NotNull
-    public void move(Direction direction) {
+    void move(Direction direction) {
         this.position.move(direction);
         lookingDirection = direction;
     }
 
-    public Direction getCurrentDirection() {
+    //last move direction;
+    Direction getCurrentDirection() {
 
         return lookingDirection;
     }

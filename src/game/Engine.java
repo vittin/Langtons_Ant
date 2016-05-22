@@ -1,37 +1,47 @@
 package game;
 
 import com.sun.istack.internal.NotNull;
+import javafx.scene.paint.Color;
 import org.jetbrains.annotations.Contract;
+
 
 import java.util.ArrayList;
 
 /**
  * Created by mati on 2016-05-18.
+ *
  */
-public class Engine {
-    Board board;
-    ArrayList<Ant> ants;
-    GameThread gameThread;
+
+class Engine {
+    private Board board;
+    private ArrayList<Ant> ants;
+    private GameThread gameThread;
+
+    //constructor1, only one ant;
     Engine(Board board, Ant ant){
         this.board = board;
         ants = new ArrayList<>();
         ants.add(ant);
     }
 
+    //constructor2, more ants = more fun;
     Engine(Board board, ArrayList<Ant> ants){
         this.board = board;
         this.ants = ants;
     }
 
+    //create new Game;
     void start() {
         gameThread = new GameThread(this);
-        gameThread.run();
+        new Thread(gameThread).start();
     }
 
-    void stop() {
-        gameThread.stop();
+    //end Game;
+    static void stop() {
+        GameThread.stop();
     }
 
+    //app logic - where ant should go;
     @Contract(pure = true)
     @NotNull
     private Direction findNextDirection(Direction direction, boolean status){
@@ -45,6 +55,7 @@ public class Engine {
         return dir;
     }
 
+    //means "next tour" also.
     void moveAll() {
         ants.forEach(ant -> {
             Position position = ant.getPosition();
@@ -60,11 +71,25 @@ public class Engine {
         });
     }
 
+    //draw results, the game is too simply to implement MVC;
     void showResults() {
-        //todo: display;
-        Ant ant = ants.get(0);
-        int x = ant.getPosition().getX();
-        int y = ant.getPosition().getY();
-        System.out.println(x + ", " + y);
+
+        ants.forEach(ant -> {
+
+            int x = ant.getPosition().getX();
+            int y = ant.getPosition().getY();
+            Color color = Color.WHITE;
+
+            try {
+                //check field under the ant;
+                boolean status = board.getField(ant.getPosition()).getStatus();
+                color = (status) ? Color.WHITE : Color.BLACK;
+            } catch (OutOfBoundsException ignored){}
+
+            //draw only new points, old points won't be removed;
+            View.draw(x,y, color);
+
+        });
+
     }
 }

@@ -2,15 +2,19 @@ package game;
 
 /**
  * Created by mati on 2016-05-19.
- * TODO: comments.
+ *
  */
-public class GameThread implements Runnable {
-    private boolean active = true;
+class GameThread implements Runnable {
+    //by default, the Thread is ready to run;
+    private static boolean active = true;
+
     private Engine engine;
 
+    //each engine create own thread;
     GameThread(Engine engine) {
         this.engine = engine;
     }
+
 
     @Override
     public void run() {
@@ -18,14 +22,14 @@ public class GameThread implements Runnable {
             engine.moveAll();
             engine.showResults();
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void stop() {
+    static void stop() {
         active = false;
     }
 }
